@@ -1,0 +1,53 @@
+//usage: $ ./gradlew -b test-job.gradle updateJenkinsItems
+
+apply plugin: 'com.terrafolio.jenkins'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/" // for gradle-plugins
+        }
+    }
+    dependencies {
+        classpath('com.terrafolio:gradle-jenkins-plugin:1.3.1')
+    }
+}
+
+project.ext {
+    projectName = 'TEST'
+    useGradleStep = project.hasProperty('useGradleStep') && ['on', 'true'].contains(project.properties.useGradleStep)
+    defaultReceipients = ''
+    defaultSubject = ''
+    defaultContent = ''
+}
+
+jenkins {
+    servers {
+        teamapps {
+            url "http://localhost:8080/"
+            username "<a user with change rights>"
+            password "<a password>"
+        }
+    }
+
+    defaultServer servers.teamapps
+
+    jobs {
+        metaJob {
+            dsl {
+                name ("${projectName}_TUTORIAL_JOB")
+                description "funky test job for ${projectName}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
+
+                steps {
+                    shell('echo Hello World2')
+                }
+
+                // discard old builds:
+                logRotator(7, 49) // daysToKeep, numBuildsToKeep
+            }
+        }
+    }
+
+}
