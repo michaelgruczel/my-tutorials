@@ -13,3 +13,4 @@ pure links;
 * https://github.com/michaelgruczel/ScalaVsJava
 * https://github.com/michaelgruczel/my-tutorials/blob/master/core-os.md
 * https://github.com/michaelgruczel/my-tutorials/blob/master/jenkins/README.md
+* https://github.com/michaelgruczel/my-tutorials/blob/master/kubernetes.md
