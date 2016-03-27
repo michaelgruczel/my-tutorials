@@ -61,12 +61,12 @@ hostPort 0 means mesos should select a free port
 
      $ curl -vX POST http://10.141.141.10:8080/v2/apps -d @nginx.json --header "Content-Type: application/json"
      $ curl http://10.141.141.10:8080/v2/apps
-     $ curl http://10.141.141.10:8080//v2/apps/nginx
+     $ curl http://10.141.141.10:8080/v2/apps/nginx
 
 details of the api can be found here http://10.141.141.10:8080/api-console/index.html or here https://mesosphere.github.io/marathon/docs/rest-api.html
 
-connect to the Mesos Web UI on 10.141.141.10:5050 and the Marathon Web UI on 10.141.141.10:8080 to see the result as well
-check one instance from outside e.g http://10.141.141.10:31551 (check your port and ip)
+connect to the Mesos Web UI on 10.141.141.10:5050 and the Marathon Web UI on 10.141.141.10:8080 to see the result as well,
+maybe test whether you can reach one instance from outside e.g http://10.141.141.10:31551 (check your port and ip, it might differ)
 
 
 ## WARNING: not tested from this point
