@@ -33,7 +33,7 @@ setup boxes
     ps -eaf | grep mesos
     curl http://10.141.141.10:8080/v2/apps
 
-### create application
+### Marathon: create application
 
 
 Let's create 2 instances of nginx
@@ -67,7 +67,6 @@ details of the api can be found here http://10.141.141.10:8080/api-console/index
 
 connect to the Mesos Web UI on 10.141.141.10:5050 and the Marathon Web UI on 10.141.141.10:8080 to see the result as well,
 maybe test whether you can reach one instance from outside e.g http://10.141.141.10:31551 (check your port and ip, it might differ)
-
 
 ## WARNING: not tested from this point
 
