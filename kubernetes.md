@@ -8,7 +8,7 @@ If something goes wrong, Kubernetes will rollback the change.
 some terminology before we play:
 
 * cluster := all nodes/vm/hosts aggregated to one virtual system (cluster)
-* pod:= group of containers (docker) that group local unit. Each container knows the other containers within a pod
+* pod:= group of containers (docker) that group local unit. Each container knows the other containers within a pod. Containers within a pod share an IP address and port space, and can find each other via localhost. Pods are always co-located and co-scheduled, and run in a shared context.
 * replication controllers:= you can define a replication of pods, means you can define how many instances of a pod you want to have and kubernetes will start another pod if one fails
 * service:= logical set of Pods running somewhere in your cluster, that all provide the same functionality.Pods can be configured to talk to the Service, and know that communication to the Service will be automatically load-balanced out to some pod that is a member of the Service.
 * label:= key-value principle to organize groups e.g. role:loadbalancer
