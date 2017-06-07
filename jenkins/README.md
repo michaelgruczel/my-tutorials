@@ -176,5 +176,8 @@ Let's say job 1 should trigger job 2 in case of a success, then we could define
 Using the jenkins build pipeline plugin (https://wiki.jenkins-ci.org/display/JENKINS/Build+Pipeline+Plugin), 
 we can get a nice UI on top of it
 
+![jenkins1](https://github.com/michaelgruczel/my-tutorials/blob/master/jenkins/jenkins1.PNG)
+
+![jenkins2](https://github.com/michaelgruczel/my-tutorials/blob/master/jenkins/jenkins2.PNG)
      
 So now you should be able to automize the most of your CI infrastructure by code.
