@@ -1,4 +1,4 @@
-//usage: $ ./gradlew -b test-job.gradle updateJenkinsItems
+//usage: $ ./gradlew -b test-pipeline.gradle updateJenkinsItems
 
 apply plugin: 'com.terrafolio.jenkins'
 
@@ -28,29 +28,48 @@ project.ext {
 
 jenkins {
     servers {
-        teamapps {
-            url "http://localhost:8080/"
-            username "<a user with change rights>"
-            password "<a password>"
+        localdemo {
+            url "http://localhost:8080"
+            username "admin"
+            password "admin"
         }
     }
 
-    defaultServer servers.teamapps
-
+    defaultServer servers.localdemo
+    
     jobs {
-        metaJob {
+        exampleJob {
             dsl {
-                name ("${projectName}_TUTORIAL_JOB")
+                description "funky test job for ${projectName}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
+
+                //steps {
+                //    powerShell('Write-Output "Hello World!"')
+                //}
+
+                // discard old builds:
+                logRotator(7, 49) // daysToKeep, numBuildsToKeep
+                publishers {
+                    // use build-pipeline-plugin
+                    // https://wiki.jenkins-ci.org/display/JENKINS/Build+Pipeline+Plugin
+                    downstream('exampleJob2', 'SUCCESS')
+                }
+            }
+        }
+
+        exampleJob2 {
+            dsl {
                 description "funky test job for ${projectName}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
 
                 steps {
-                    shell('echo Hello World2')
+                    shell('ansible --version')
                 }
 
                 // discard old builds:
                 logRotator(7, 49) // daysToKeep, numBuildsToKeep
             }
         }
+
+        
     }
 
 }

@@ -130,6 +130,51 @@ test-job.gradle
 
 In order to execute it you just have to run and the job will be created (or updated if already existing)
 
+    ./gradlew -b test-pipeline.gradle updateJenkinsItems
+
+## pipelines
+
+Let's say job 1 should trigger job 2 in case of a success, then we could define
+
+    jobs {
+        exampleJob {
+            dsl {
+                description "funky test job for ${projectName}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
+
+                //steps {
+                //    powerShell('Write-Output "Hello World!"')
+                //}
+
+                // discard old builds:
+                logRotator(7, 49) // daysToKeep, numBuildsToKeep
+                publishers {
+                    // use build-pipeline-plugin
+                    // https://wiki.jenkins-ci.org/display/JENKINS/Build+Pipeline+Plugin
+                    downstream('exampleJob2', 'SUCCESS')
+                }
+            }
+        }
+
+        exampleJob2 {
+            dsl {
+                description "funky test job for ${projectName}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
+
+                steps {
+                    shell('ansible --version')
+                }
+
+                // discard old builds:
+                logRotator(7, 49) // daysToKeep, numBuildsToKeep
+            }
+        }
+
+        
+    }
+
     ./gradlew -b test-job.gradle updateJenkinsItems
+
+Using the jenkins build pipeline plugin (https://wiki.jenkins-ci.org/display/JENKINS/Build+Pipeline+Plugin), 
+we can get a nice UI on top of it
+
      
 So now you should be able to automize the most of your CI infrastructure by code.
