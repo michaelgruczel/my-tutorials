@@ -171,7 +171,9 @@ Let's say job 1 should trigger job 2 in case of a success, then we could define
         
     }
 
-    ./gradlew -b test-job.gradle updateJenkinsItems
+you can create the jobs by:
+
+        ./gradlew -b test-pipeline.gradle updateJenkinsItems
 
 Using the jenkins build pipeline plugin (https://wiki.jenkins-ci.org/display/JENKINS/Build+Pipeline+Plugin), 
 we can get a nice UI on top of it
